@@ -2,18 +2,19 @@
 
 #include <cstddef>
 
-byte_track::STrack::STrack(const Rect<float>& rect, const float& score) :
-    kalman_filter_(),
-    mean_(),
-    covariance_(),
-    rect_(rect),
-    state_(STrackState::New),
-    is_activated_(false),
-    score_(score),
-    track_id_(0),
-    frame_id_(0),
-    start_frame_id_(0),
-    tracklet_len_(0)
+byte_track::STrack::STrack(const Rect<float>& rect, const float& score, int label) :
+        kalman_filter_(),
+        mean_(),
+        covariance_(),
+        rect_(rect),
+        state_(STrackState::New),
+        is_activated_(false),
+        score_(score),
+        track_id_(0),
+        frame_id_(0),
+        start_frame_id_(0),
+        tracklet_len_(0),
+        label_(label)
 {
 }
 

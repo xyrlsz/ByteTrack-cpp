@@ -17,7 +17,7 @@ enum class STrackState {
 class STrack
 {
 public:
-    STrack(const Rect<float>& rect, const float& score);
+    STrack(const Rect<float>& rect, const float& score, int label);
     ~STrack();
 
     const Rect<float>& getRect() const;
@@ -39,6 +39,8 @@ public:
     void markAsLost();
     void markAsRemoved();
 
+    int getLabel() const { return label_; }
+
 private:
     KalmanFilter kalman_filter_;
     KalmanFilter::StateMean mean_;
@@ -54,6 +56,7 @@ private:
     size_t start_frame_id_;
     size_t tracklet_len_;
 
+    int label_;
     void updateRect();
 };
 }

@@ -37,7 +37,7 @@ std::vector<byte_track::BYTETracker::STrackPtr> byte_track::BYTETracker::update(
 
     for (const auto &object : objects)
     {
-        const auto strack = std::make_shared<STrack>(object.rect, object.prob);
+        const auto strack = std::make_shared<STrack>(object.rect, object.prob, object.label);
         if (object.prob >= track_thresh_)
         {
             det_stracks.push_back(strack);
@@ -454,7 +454,9 @@ double byte_track::BYTETracker::execLapjv(const std::vector<std::vector<float>> 
     {
         if (!extend_cost)
         {
-            throw std::runtime_error("The `extend_cost` variable should set True");
+//            throw std::runtime_error("The `extend_cost` variable should set True");
+            fprintf(stderr, "The `extend_cost` variable should set True");
+            abort(); // 直接终止程序
         }
     }
 
@@ -533,7 +535,9 @@ double byte_track::BYTETracker::execLapjv(const std::vector<std::vector<float>> 
     int ret = lapjv_internal(n, cost_ptr, x_c, y_c);
     if (ret != 0)
     {
-        throw std::runtime_error("The result of lapjv_internal() is invalid.");
+//        throw std::runtime_error("The result of lapjv_internal() is invalid.");
+        fprintf(stderr, "The result of lapjv_internal() is invalid.");
+        abort();
     }
 
     double opt = 0.0;

@@ -288,11 +288,15 @@ int _ca_dense(
         j = find_path_dense(n, cost, *pfree_i, y, v, pred);
         if (j < 0)
         {
-            throw std::runtime_error("Error occured in _ca_dense(): j < 0");
+//            throw std::runtime_error("Error occured in _ca_dense(): j < 0");
+            fprintf(stderr, "Error occured in _ca_dense(): j < 0");
+            abort(); // 直接终止程序
         }
         if (j >= static_cast<int>(n))
         {
-            throw std::runtime_error("Error occured in _ca_dense(): j >= n");
+//            throw std::runtime_error("Error occured in _ca_dense(): j >= n");
+            fprintf(stderr, "Error occured in _ca_dense(): j >= n");
+            abort();
         }
         while (i != *pfree_i) {
             i = pred[j];
@@ -300,7 +304,9 @@ int _ca_dense(
             LAPJV_CPP_SWAP_INDICES(j, x[i]);
             k++;
             if (k >= n) {
-                throw std::runtime_error("Error occured in _ca_dense(): k >= n");
+//                throw std::runtime_error("Error occured in _ca_dense(): k >= n");
+                fprintf(stderr, "Error occured in _ca_dense(): k >= n");
+                abort();
             }
         }
     }
